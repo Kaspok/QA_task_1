@@ -6,15 +6,17 @@ import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Condition.*;
-import static  com.codeborne.selenide.Selenide. * ;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class StudentRegistrationForm {
 
     @BeforeAll
-    static void setup(){
+    static void setup() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.startMaximized = true;
     }
@@ -42,7 +44,7 @@ public class StudentRegistrationForm {
         $(byText("Reading")).click();
         $(byText("Music")).click();
 
-        $("#uploadPicture").sendKeys("C:\\Users\\79051\\Desktop\\ava.jpg");
+        $("#uploadPicture").uploadFile(new File("src/test/resources/ava.jpg"));
         $("#currentAddress").setValue("This is Current Address");
 
         $("#react-select-4-input").shouldBe(Condition.disabled); // Проверям, что поле City не доступно для редактирования (так как не заполнено поле State).
@@ -67,8 +69,5 @@ public class StudentRegistrationForm {
         $x("//td[text()='Picture']/following::td").shouldHave(text("ava.jpg"));
         $x("//td[text()='Address']/following::td").shouldHave(text("This is Current Address"));
         $x("//td[text()='State and City']/following::td").shouldHave(text("Uttar Pradesh Merrut"));
-
-        sleep(1000);
-
     }
 }
