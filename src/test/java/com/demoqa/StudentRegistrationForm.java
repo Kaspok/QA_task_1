@@ -37,12 +37,11 @@ public class StudentRegistrationForm {
         $(".react-datepicker__year-select").selectOptionByValue("1998");
         $(".react-datepicker__day--020").click();
 
-        SelenideElement Subject = $("#subjectsInput");
-        Subject.setValue("Math").pressEnter();
-        Subject.setValue("Histor").pressEnter();
+        $("#subjectsInput").setValue("Math").pressEnter();
+        $("#subjectsInput").setValue("Histor").pressEnter();
 
-        $(byText("Reading")).click();
-        $(byText("Music")).click();
+        $("#hobbiesWrapper").$(byText("Reading")).click();
+        $("#hobbiesWrapper").$(byText("Music")).click();
 
         $("#uploadPicture").uploadFile(new File("src/test/resources/ava.jpg"));
         $("#currentAddress").setValue("This is Current Address");
@@ -51,8 +50,7 @@ public class StudentRegistrationForm {
         $("#react-select-3-input").setValue("Uttar").pressEnter(); // Заполняем поле State.
         $("#react-select-4-input").shouldBe(Condition.enabled).setValue("Me").pressEnter(); // Проверяем что поле City стала доступна для редактирования, вводим данные.
 
-        executeJavaScript("window.scrollTo(0, 200)"); // Прокручиваем страницу вниз
-        $("#submit").click();
+        $("#submit").scrollTo().click(); // Прокручиваем страницу вниз
 
         // Проверка таблицы и веденных данных
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
